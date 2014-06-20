@@ -1,17 +1,12 @@
 require 'rubygems'
 require 'icmp4em'
 
+# From - https://github.com/jakedouglas/icmp4em
+
 Signal.trap("INT") { EventMachine::stop_event_loop }
-
-#host = ICMP4EM::ICMPv4.new("8.8.8.8")
-#host.on_success {|host, seq, latency| puts "Got echo sequence number #{seq} from host #{host}. It took #{latency}ms." }
-#host.on_expire {|host, seq, exception| puts "I shouldn't fail on loopback interface, but in case I did: #{exception.to_s}"}
-
-#EM.run { host.schedule }
 
 pings = []
 pings << ICMP4EM::ICMPv4.new("8.8.8.8", :stateful => true)
-pings << ICMP4EM::ICMPv4.new("10.1.0.175", :stateful => true)
 
 Signal.trap("INT") { EventMachine::stop_event_loop }
 
